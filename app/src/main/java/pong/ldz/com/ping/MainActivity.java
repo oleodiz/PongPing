@@ -5,42 +5,58 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
+import Adapters.HostAdapter;
 import Comunicacao.Conversao;
 import Comunicacao.XMLParser;
 import Model.Host;
-import Model.Hosts;
 
 public class MainActivity extends AppCompatActivity {
 
-    Hosts hosts;
+    ArrayList<Host> hosts;
+    ListView lst_hosts;
+    Boolean a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hosts = new Hosts();
-
-
+        hosts = new ArrayList<Host>();
+        lst_hosts = (ListView) findViewById(R.id.lst_hosts);
+        a = true;
         new CarregaXML().executeOnExecutor(Executors.newFixedThreadPool(4), "http://131.72.69.117/dados.xml");
     }
-
 
     private class CarregaXML extends AsyncTask<String, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... url) {
 
-            XMLParser parser = new XMLParser(); // the parser create as seen in the Gist from GitHub
-            String xml = parser.getXmlFromUrl(url[0]); // getting XML from URL
-
-            hosts = new Conversao().XMLtoClass(hosts, xml);
-
+            XMLParser parser = new XMLParser();
+            while(a) {
+                try {
+                    String xml = parser.getXmlFromUrl(url[0]);
+                    hosts = new Conversao().XMLtoClass(hosts, xml);
+                    publishProgress();
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return true;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... value)
+        {
+            HostAdapter hostsAdapter = new HostAdapter(hosts, getApplicationContext());
+            lst_hosts.setAdapter(hostsAdapter);
+
         }
 
         @Override

@@ -1,90 +1,50 @@
 package pong.ldz.com.ping;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ListView;
 
-import org.w3c.dom.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.concurrent.Executors;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import Adapters.HostAdapter;
-import Comunicacao.Conversao;
-import Comunicacao.XMLParser;
-import Model.Host;
+import Comunicacao.Acesso;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Host> hosts;
-    ListView lst_hosts;
-    Boolean a;
+    public static String cookie;
+    public static boolean logado;
+    public static SharedPreferences sharedPrefs;
+    public static SharedPreferences.Editor editor;
+    Context context;
+    Acesso acesso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hosts = new ArrayList<Host>();
-        lst_hosts = (ListView) findViewById(R.id.lst_hosts);
-        a = true;
-        new CarregaXML().executeOnExecutor(Executors.newFixedThreadPool(4), "http://131.72.69.117/dados.xml");
-    }
 
-    private class CarregaXML extends AsyncTask<String, Integer, Boolean> {
+        context = this;
+        acesso = new Acesso("131.72.69.117", context);
+        sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        logado = sharedPrefs.getBoolean("LOGADO", false);
+        cookie = sharedPrefs.getString("COOKIE", "");
+         editor = sharedPrefs.edit();
 
-        @Override
-        protected Boolean doInBackground(String... url) {
-
-            XMLParser parser = new XMLParser();
-            while(a) {
-                try {
-                    String xml = parser.getXmlFromUrl(url[0]);
-                    hosts = new Conversao().XMLtoClass(hosts, xml);
-                    publishProgress();
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            return true;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... value)
-        {
-            HostAdapter hostsAdapter = new HostAdapter(hosts, getApplicationContext());
-            lst_hosts.setAdapter(hostsAdapter);
-
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-
-        }
+        acesso.validarCookie("oleodiz|1442363615|n8U8XzGgJzfGnULwNaiXPAc5HiOWhEsaj2Q03DMei0a|bd70600ab2c1a30c0bffb2d78c64509bac71e21690af98f20b06db22a7d577e3");
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

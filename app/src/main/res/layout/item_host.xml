@@ -66,7 +66,7 @@
                 android:textColor="#000000"
                 android:layout_gravity="center"
                 android:textSize="10sp"
-                android:text="18/09/1992" />
+                android:text="01/01/0001" />
 
             <TextView
                 android:id="@+id/txt_hora"
@@ -75,7 +75,7 @@
                 android:layout_weight="6"
                 android:layout_gravity="center"
                 android:textSize="10sp"
-                android:text="17:19" />
+                android:text="00:00" />
 
 
         </LinearLayout>

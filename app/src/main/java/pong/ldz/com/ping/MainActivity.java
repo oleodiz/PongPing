@@ -20,30 +20,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Comunicacao.Acesso;
+import Model.Usuario;
 
 
 public class MainActivity extends AppCompatActivity {
 
     public static String cookie;
     public static boolean logado;
+    public static String endereco;
     public static SharedPreferences sharedPrefs;
     public static SharedPreferences.Editor editor;
+    public static Usuario usuario;
     Context context;
     Acesso acesso;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         context = this;
-        acesso = new Acesso("131.72.69.117", context);
+        endereco = "131.72.69.117";
+
+        acesso = new Acesso(endereco, context);
         sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
         logado = sharedPrefs.getBoolean("LOGADO", false);
         cookie = sharedPrefs.getString("COOKIE", "");
-         editor = sharedPrefs.edit();
+       // endereco = sharedPrefs.getString("ENDERECO", "");
 
-        acesso.validarCookie("oleodiz|1442363615|n8U8XzGgJzfGnULwNaiXPAc5HiOWhEsaj2Q03DMei0a|bd70600ab2c1a30c0bffb2d78c64509bac71e21690af98f20b06db22a7d577e3");
+        editor = sharedPrefs.edit();
+
+        acesso.validarCookie(cookie);
     }
 
 

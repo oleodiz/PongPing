@@ -28,6 +28,10 @@
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        <activity
+            android:name=".HostsActivity"
+            android:label="@string/title_activity_hosts" >
+        </activity>
     </application>
 
 </manifest>

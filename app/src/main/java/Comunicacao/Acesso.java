@@ -1,5 +1,6 @@
 package Comunicacao;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +23,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pong.ldz.com.ping.HostsActivity;
 import pong.ldz.com.ping.LoginActivity;
 import pong.ldz.com.ping.MainActivity;
 
@@ -101,7 +104,7 @@ public class Acesso {
                     }
                 }
             }
-
+            publishProgress(false);
             return false;
         }
 
@@ -110,7 +113,7 @@ public class Acesso {
             if (result[0])
             {
                 Toast.makeText(context, "Válido", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, LoginActivity.class); // MUDAR TELA
+                Intent intent = new Intent(context, HostsActivity.class);
                 context.startActivity(intent);
             }
             else
@@ -119,8 +122,13 @@ public class Acesso {
                 Intent intent = new Intent(context, LoginActivity.class);
                 context.startActivity(intent);
             }
-
+            ((Activity) context).finish();
         }
     }
+
+
+
+
+
 
 }

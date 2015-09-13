@@ -65,9 +65,10 @@ public class HostAdapter extends BaseAdapter {
 
         holder.txt_nome.setText(hosts.get(position).nome);
         holder.txt_ip.setText(hosts.get(position).ip);
-        holder.txt_data.setText(hosts.get(position).ultima_alteracao.split(" ")[0]);
-        holder.txt_hora.setText(hosts.get(position).ultima_alteracao.split(" ")[1]);
-
+        if (hosts.get(position).ultima_alteracao != "null") {
+            holder.txt_data.setText(hosts.get(position).ultima_alteracao.split(" ")[0]);
+            holder.txt_hora.setText(hosts.get(position).ultima_alteracao.split(" ")[1]);
+        }
         if (hosts.get(position).em_pe)
             holder.img_okHost.setImageResource(R.drawable.serveron);
         else

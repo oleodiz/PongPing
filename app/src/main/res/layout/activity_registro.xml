@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="pong.ldz.com.ping.RegistroActivity">
+
+    <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" android:visibility="gone" />
+
+    <ScrollView android:id="@+id/login_form" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+
+    <AutoCompleteTextView android:id="@+id/txt_usuario" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="@string/usuario"
+        android:inputType="textEmailAddress" android:maxLines="1"
+        android:singleLine="true" />
+
+
+    <EditText android:id="@+id/txt_senha" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="@string/senha"
+        android:imeOptions="actionUnspecified" android:inputType="textPassword"
+        android:maxLines="1" android:singleLine="true" />
+
+    <EditText android:id="@+id/txt_confirmaSenha" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="@string/confirmar_senha"
+        android:imeOptions="actionUnspecified" android:inputType="textPassword"
+        android:maxLines="1" android:singleLine="true" />
+
+
+    <AutoCompleteTextView android:id="@+id/txt_email" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:hint="@string/email"
+    android:inputType="textEmailAddress" android:maxLines="1"
+    android:singleLine="true" />
+
+    <Button android:id="@+id/btn_registrar" style="?android:textAppearanceSmall"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:text="@string/registrar"
+        android:textStyle="bold" />
+
+        </LinearLayout>
+</ScrollView>
+</LinearLayout>

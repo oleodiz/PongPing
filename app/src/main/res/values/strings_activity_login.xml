@@ -2,13 +2,19 @@
     <string name="title_activity_login">Acesso</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Usuário</string>
-    <string name="prompt_password">Senha</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="confirmar_senha">Confime a Senha</string>
     <string name="action_sign_in">Entrar</string>
+    <string name="registrar">Registrar</string>
+    <string name="email">Email</string>
+    <string name="email_invalido">Email inválido</string>
     <string name="action_sign_in_short">Entrar</string>
 
-    <string name="error_invalid_email">Usuário inválido</string>
-    <string name="error_invalid_password">Senha muito curta</string>
-    <string name="error_incorrect_password">Senha incorreta</string>
-    <string name="error_field_required">Preencha esse campo</string>
+    <string name="usuario_invalido">Usuário inválido</string>
+    <string name="usuario_curto">Muito curto</string>
+    <string name="senha_curta">Senha muito curta</string>
+    <string name="senha_diferente">Confirmação de senha incorreta</string>
+    <string name="senha_errada">Senha incorreta</string>
+    <string name="preencher_campo">Preencha esse campo</string>
 </resources>

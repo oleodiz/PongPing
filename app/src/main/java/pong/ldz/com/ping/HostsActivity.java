@@ -1,6 +1,7 @@
 package pong.ldz.com.ping;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +42,7 @@ import Model.Host;
 public class HostsActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    ArrayList<Host> hosts;
+    public static ArrayList<Host> hosts;
     Context context;
     ListView ltv_hosts;
 
@@ -73,24 +75,6 @@ public class HostsActivity extends AppCompatActivity
 
         new obeterHosts().execute(MainActivity.cookie);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -168,14 +152,16 @@ public class HostsActivity extends AppCompatActivity
         protected void onProgressUpdate(Boolean... result) {
             HostAdapter adapter = new HostAdapter(hosts, context);
             ltv_hosts.setAdapter(adapter);
+
+            ltv_hosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                  //  Intent intent = new Intent(getApplicationContext(), ScrollingActivity.class);
+                   // startActivity(intent);
+                }
+            });
         }
     }
-
-
-
-
-
-
 
 
 
@@ -233,6 +219,14 @@ public class HostsActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_mapa) {
+            Intent intent = new Intent(getApplicationContext(), MapaActivity.class);
+            startActivity(intent);
             return true;
         }
 

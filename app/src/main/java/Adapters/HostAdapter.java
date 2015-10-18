@@ -66,7 +66,10 @@ public class HostAdapter extends BaseAdapter {
         holder.txt_nome.setText(hosts.get(position).nome);
         holder.txt_ip.setText(hosts.get(position).ip);
         if (hosts.get(position).ultima_alteracao != "null") {
-            holder.txt_data.setText(hosts.get(position).ultima_alteracao.split(" ")[0]);
+            String data = hosts.get(position).ultima_alteracao.split(" ")[0];
+            String data_tratada[] = data.split("-");
+            data = data_tratada[2]+"/"+data_tratada[1]+"/"+data_tratada[0];
+            holder.txt_data.setText(data);
             holder.txt_hora.setText(hosts.get(position).ultima_alteracao.split(" ")[1]);
         }
         if (hosts.get(position).em_pe)

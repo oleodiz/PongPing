@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pong.ldz.com.ping.BootReciever;
 import pong.ldz.com.ping.HostsActivity;
 import pong.ldz.com.ping.LoginActivity;
 import pong.ldz.com.ping.MainActivity;
@@ -72,13 +73,13 @@ public class Acesso {
                         try {
                             boolean valid = new JSONObject(sb.toString()).getBoolean("valid");
                             if (valid) {
-                                MainActivity.editor.putBoolean("LOGADO", true);
-                                MainActivity.editor.commit();
+                                BootReciever.editor.putBoolean("LOGADO", true);
+                                BootReciever.editor.commit();
                                 publishProgress(true);
                                 return true;
                             } else {
-                                MainActivity.editor.putBoolean("LOGADO", false);
-                                MainActivity.editor.commit();
+                                BootReciever.editor.putBoolean("LOGADO", false);
+                                BootReciever.editor.commit();
                                 publishProgress(false);
 
                             }

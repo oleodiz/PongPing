@@ -110,9 +110,6 @@ public class RegistroActivity extends AppCompatActivity {
         new Cadastrar().execute();
     }
 
-
-
-
     public class Cadastrar extends AsyncTask<Void, Void, Boolean> {
 
         String erro;
@@ -143,15 +140,15 @@ public class RegistroActivity extends AppCompatActivity {
                         try {
                             String statuss = new JSONObject(sb.toString()).getString("status");
                             if (statuss.equals("ok")) {
-                                MainActivity.usuario = new Usuario();
+                                BootReciever.usuario = new Usuario();
 
-                                MainActivity.usuario.id = new JSONObject(sb.toString()).getInt("user_id");
-                                MainActivity.usuario.username = usuario;
-                                MainActivity.usuario.avatar = "";
-                                MainActivity.usuario.cookie = new JSONObject(sb.toString()).getString("cookie");
+                                BootReciever.usuario.id = new JSONObject(sb.toString()).getInt("user_id");
+                                BootReciever.usuario.username = usuario;
+                                BootReciever.usuario.avatar = "";
+                                BootReciever.usuario.cookie = new JSONObject(sb.toString()).getString("cookie");
 
-                                MainActivity.editor.putString("COOKIE", MainActivity.usuario.cookie);
-                                MainActivity.editor.commit();
+                                BootReciever.editor.putString("COOKIE", BootReciever.usuario.cookie);
+                                BootReciever.editor.commit();
 
                                 return true;
                             } else {
@@ -178,9 +175,6 @@ public class RegistroActivity extends AppCompatActivity {
                     }
                 }
             }
-
-
-
             return false;
         }
 
@@ -246,12 +240,8 @@ public class RegistroActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }

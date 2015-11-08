@@ -45,17 +45,23 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         mMap.setMyLocationEnabled(true);
-        LatLngBounds bounds = builder.build();
+        try {
+            LatLngBounds bounds = builder.build();
 
-        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 50);
+            final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 50);
 
 
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                mMap.moveCamera(cu);
-                mMap.animateCamera(cu);
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    mMap.moveCamera(cu);
+                    mMap.animateCamera(cu);
+                }
+            });
             }
-        });
+        catch(Exception e)
+        {
+            e.getMessage();
+        }
     }
 }

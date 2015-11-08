@@ -299,15 +299,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         try {
                             String statuss = new JSONObject(sb.toString()).getString("status");
                             if (statuss.equals("ok")) {
-                                MainActivity.usuario = new Usuario();
+                                BootReciever.usuario = new Usuario();
 
-                                MainActivity.usuario.id = new JSONObject(sb.toString()).getJSONObject("user").getInt("id");
-                                MainActivity.usuario.username = new JSONObject(sb.toString()).getJSONObject("user").getString("username");
-                                MainActivity.usuario.avatar = new JSONObject(sb.toString()).getJSONObject("user").getString("avatar");
-                                MainActivity.usuario.cookie = new JSONObject(sb.toString()).getString("cookie");
+                                BootReciever.usuario.id = new JSONObject(sb.toString()).getJSONObject("user").getInt("id");
+                                BootReciever.usuario.username = new JSONObject(sb.toString()).getJSONObject("user").getString("username");
+                                BootReciever.usuario.avatar = new JSONObject(sb.toString()).getJSONObject("user").getString("avatar");
+                                BootReciever.usuario.cookie = new JSONObject(sb.toString()).getString("cookie");
 
-                                MainActivity.editor.putString("COOKIE", MainActivity.usuario.cookie);
-                                MainActivity.editor.commit();
+                                BootReciever.editor.putString("COOKIE", BootReciever.usuario.cookie);
+                                BootReciever.editor.commit();
 
                                 return true;
                             } else {
